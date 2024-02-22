@@ -7,6 +7,19 @@
 
 #define __UNUSED(x) ((void)x)
 
+int debug(const char* format, ...) 
+{
+    int ret = 0;
+
+	va_list args;
+    va_start(args, format);
+    ret = printf("INFO: ");
+    ret = vprintf(format, args);
+    va_end(args);
+
+	return ret;
+}
+
 // window size
 const int WINDOW_WIDTH 	= 640;
 const int WINDOW_HEIGHT = 480;
@@ -19,10 +32,10 @@ int main(int argc, char *argv[])
 
 	// init SDL
 	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) == -1) {
-		printf("SDL initialization failed, %s\n", SDL_GetError());
+		debug("SDL initialization failed, %s\n", SDL_GetError());
 		return 1;
 	}
-	printf("SDL initialized.\n");
+	debug("SDL initialized.\n");
 
 	// create a window
 	SDL_Window *window = SDL_CreateWindow(
@@ -33,21 +46,21 @@ int main(int argc, char *argv[])
 			WINDOW_HEIGHT,
 			SDL_WINDOW_SHOWN);
 	if (window == NULL) {
-		printf("Window creation failed, %s\n", SDL_GetError());
+		debug("Window creation failed, %s\n", SDL_GetError());
 		SDL_Quit();
 		return 1;
 	}
-	printf("Window creation completed\n");
+	debug("Window creation completed\n");
 
 	// create a renderer
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == NULL) {
-		printf("Renderer creation failed, %s\n", SDL_GetError());
+		debug("Renderer creation failed, %s\n", SDL_GetError());
 		SDL_DestroyWindow(window);
 		SDL_Quit();
 		return 1;
 	}
-	printf("Renderer creation completed\n");
+	debug("Renderer creation completed\n");
 	
 	// 0:xxx; 1:xxx
 	int shape = 0;
