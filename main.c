@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
         SDL_RenderClear(renderer);
 
 		// draw a red filled rect
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+		SDL_SetRenderDrawColor(renderer, 120, 120, 0, 0);
 		const SDL_Rect rect = {.x = 0, .y = 0, .w = 300, .h = 100};
 		SDL_RenderFillRect(renderer, &rect);
 
